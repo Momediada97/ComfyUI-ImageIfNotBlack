@@ -7,17 +7,19 @@ class ImageIfNotBlack:
             }
         }
 
-    RETURN_TYPES = ("IMAGE", "STRING")
-    RETURN_NAMES = ("image_out", "status_text")
+    # اول STRING بعد IMAGE
+    RETURN_TYPES = ("STRING", "IMAGE")
+    RETURN_NAMES = ("status_text", "image_out")
     FUNCTION = "check"
     CATEGORY = "utils"
 
     def check(self, image):
         has_white = image.max().item() > 0
+
         if has_white:
-            return (image, "True")
+            return ("True", image)
         else:
-            return (None, "False")
+            return ("False", None)
 
 
 NODE_CLASS_MAPPINGS = {
